@@ -1,13 +1,13 @@
 name: Deploy to PROD
 
-env:
-  branch: "main"
-
 on:
   push:
     branches: [ $branch ]
   pull_request:
     branches: [ $branch ]
+
+env:
+  branch: "main"
 
 jobs:
   build-workflow:
