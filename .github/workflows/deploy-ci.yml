@@ -1,0 +1,16 @@
+name: Deploy to CI
+
+env:
+  branch: "develop"
+
+on:
+  push:
+    branches: [ $branch ]
+  pull_request:
+    branches: [ $branch ]
+
+jobs:
+  build-workflow:
+    uses: ./.github/workflows/build-workflow.yml
+    with:
+      branch: $branch

@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        branch: ${{ input.branch }}
+        branch: ${{ inputs.branch }}
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
