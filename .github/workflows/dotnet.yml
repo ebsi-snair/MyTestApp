@@ -13,4 +13,4 @@ jobs:
   build-workflow:
     uses: ./.github/workflows/build-workflow.yml
     with:
-      branch: "main"
+      branch: "develop"
