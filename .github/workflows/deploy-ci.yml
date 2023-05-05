@@ -1,13 +1,13 @@
 name: Deploy to CI
 
-env:
-  branch: "develop"
-
 on:
   push:
     branches: [ $branch ]
   pull_request:
     branches: [ $branch ]
+
+env:
+  branch: "develop"
 
 jobs:
   build-workflow:
