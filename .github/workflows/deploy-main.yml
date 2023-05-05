@@ -2,9 +2,9 @@ name: Deploy to PROD
 
 on:
   push:
-    branches: [ $branch ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ $branch ]
+    branches: [ "main" ]
 
 env:
   branch: "main"
