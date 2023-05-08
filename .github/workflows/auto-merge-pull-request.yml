@@ -14,6 +14,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Check for feature branch
+        id: check-branch
+        run: |
+          # Extract the branch name from the pull request head ref
+          branch="${{ github.event.pull_request.head.ref }}"
+
+          # Check if the branch name starts with "features/"
+          if [[ "$branch" != features/* ]]; then
+            echo "Pull request is not from a feature branch"
+            exit 78 # Exit with a neutral status code to stop the job
+          fi        
+
       - name: Merge feature branch to branch
         run: |
           # Extract the branch name from the pull request head ref
