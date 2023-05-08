@@ -1,0 +1,19 @@
+name: Deploy to CI
+
+name: Build and deploy a branch
+
+on:
+  push:
+    branches:
+      - develop
+      - qa
+      - 'features/*'
+      - staging
+      - main
+      - 'releases/*'
+
+jobs:
+  build-workflow:
+    uses: ./.github/workflows/build-workflow.yml
+    with:
+      branch: ${{ github.event.ref }}
