@@ -17,14 +17,17 @@ jobs:
       - name: Check for feature branch
         id: check-branch
         run: |
-          # Extracts the branch name from the pull request head ref
+          # Extract the branch name from the pull request head ref
           branch="${{ github.event.pull_request.head.ref }}"
 
-          # Check if the branch name starts with "features/"
-          if [[ "$branch" != features/* ]]; then
-            echo "Pull request is not from a feature branch"
+          # Define the regular expression pattern to match the branch name
+          pattern="^features/[A-Z0-9]+-[0-9]+/.*$"
+
+          # Check if the branch name matches the pattern
+          if [[ ! "$branch" =~ $pattern ]]; then
+            echo "Pull request is not from a valid feature branch"
             exit 78 # Exit with a neutral status code to stop the job
-          fi        
+          fi      
 
       - name: Merge feature branch to branch
         run: |
