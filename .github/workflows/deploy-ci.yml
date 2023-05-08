@@ -2,9 +2,9 @@ name: Deploy to CI
 
 on:
   push:
-    branches: [ $branch ]
+    branches: [ "develop" ]
   pull_request:
-    branches: [ $branch ]
+    branches: [ "develop" ]
 
 env:
   branch: "develop"
