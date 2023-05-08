@@ -33,12 +33,13 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration  Release
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
 
     - name: Publish package
+      if: startsWith(github.ref, 'refs/heads/develop') || startsWith(github.ref, 'refs/heads/qa') || startsWith(github.ref, 'refs/heads/staging')|| startsWith(github.ref, 'refs/heads/releases/')
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: dotnet nuget push ./MyProject/bin/Release/*.nupkg --source https://nuget.pkg.github.com/ebsi-snair/index.json
+      run: dotnet nuget push **/*.nupkg --source https://nuget.pkg.github.com/ebsi-snair/index.json
