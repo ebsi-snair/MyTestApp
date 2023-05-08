@@ -17,7 +17,7 @@ jobs:
       - name: Check for feature branch
         id: check-branch
         run: |
-          # Extract the branch name from the pull request head ref
+          # Extracts the branch name from the pull request head ref
           branch="${{ github.event.pull_request.head.ref }}"
 
           # Check if the branch name starts with "features/"
