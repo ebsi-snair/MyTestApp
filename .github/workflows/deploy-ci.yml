@@ -2,15 +2,16 @@ name: Deploy to CI
 
 on:
   push:
-    branches: [ "develop" ]
-  pull_request:
-    branches: [ "develop" ]
-
-env:
-  branch: "develop"
+    branches:
+      - develop
+      - qa
+      - 'features/*'
+      - staging
+      - main
+      - 'releases/*'
 
 jobs:
   build-workflow:
     uses: ./.github/workflows/build-workflow.yml
     with:
-      branch: $branch
+      branch: ${{ github.event.ref }}
