@@ -1,0 +1,25 @@
+name: Auto Merge Pull Request
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - qa
+      - staging
+
+jobs:
+  merge-features:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Merge feature branch to branch
+        run: |
+          # Extract the branch name from the pull request head ref
+          branch="${{ github.event.pull_request.head.ref }}"
+
+          # Merge the feature branch into the target branch
+          git fetch
+          git merge "$branch"
+          git push origin "$GITHUB_REF"
