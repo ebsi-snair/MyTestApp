@@ -3,7 +3,8 @@ name: Code Analysis
 on:
   push:
     branches:
-      - 'features/[A-Z0-9]+-[0-9]+/*'
+      # - 'features/[A-Z0-9]+-[0-9]+/*'
+      - develop
 
 jobs:
   code-analysis:

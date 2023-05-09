@@ -5,7 +5,7 @@ on:
     branches:
       - develop
       - qa
-      - 'features/[A-Z0-9]+-[0-9]+/*'
+      # - 'features/[A-Z0-9]+-[0-9]+/*'
       - staging
       - main
       - 'releases/*'
