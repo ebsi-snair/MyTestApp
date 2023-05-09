@@ -9,29 +9,25 @@ jobs:
   code-analysis:
     runs-on: ubuntu-latest
 
+    permissions:
+      # required for all workflows
+      security-events: write
+
+      # only required for workflows in private repositories
+      actions: read
+      contents: read
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '6.0.x'
-
-    - name: Restore dependencies
-      run: dotnet restore
-
-    - name: Setup CodeQL
+    - name: Init CodeQL
       uses: github/codeql-action/init@v2
+      with:
+        language: csharp
 
-    - name: Build and compile CodeQL database
-      run: |
-        dotnet build
-        /opt/hostedtoolcache/CodeQL/*/bin/codeql database init --language=cs --source-root=. codeql-db
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
 
     - name: Perform code analysis
       uses: github/codeql-action/analyze@v2
-      with:
-        database: codeql-db
-        query: security-extended.ql
-        language: csharp
