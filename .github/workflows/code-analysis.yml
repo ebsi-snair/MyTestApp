@@ -1,0 +1,34 @@
+name: Code Analysis
+
+on:
+  push:
+    branches:
+      # - 'features/[A-Z0-9]+-[0-9]+/*'
+      - develop
+
+jobs:
+  code-analysis:
+    runs-on: ubuntu-latest
+
+    permissions:
+      # required for all workflows
+      security-events: write
+
+      # only required for workflows in private repositories
+      actions: read
+      contents: read
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Init CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: csharp
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+
+    - name: Perform code analysis
+      uses: github/codeql-action/analyze@v2
