@@ -40,7 +40,6 @@ jobs:
 
     - name: Publish package
       if: startsWith(github.ref, 'refs/heads/develop') || startsWith(github.ref, 'refs/heads/qa') || startsWith(github.ref, 'refs/heads/staging')|| startsWith(github.ref, 'refs/heads/releases/*')
-      with:
-        nuget-api-key: ${{ secrets.GITHUB_TOKEN }}
-        nuget-version: 'latest'
-      run: dotnet nuget push **/*.nupkg --source https://nuget.pkg.github.com/ebsi-snair/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: dotnet nuget push **/*.nupkg --source https://nuget.pkg.github.com/${{ github.repository_owner }} -k ${{ env.NUGET_AUTH_TOKEN }} --skip-duplicate
