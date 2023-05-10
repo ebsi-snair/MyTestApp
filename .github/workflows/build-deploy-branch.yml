@@ -15,6 +15,4 @@ jobs:
     uses: ./.github/workflows/build-workflow.yml
     with:
       branch: ${{ github.event.ref }}
-    concurrency:
-      group: ${{ github.event.ref }}
-      cancel-in-progress: true
+

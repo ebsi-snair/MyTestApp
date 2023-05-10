@@ -12,6 +12,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
+
     steps:
     - name: Checkout branch
       uses: actions/checkout@v3
@@ -36,7 +40,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
 
     - name: Create Package
-      run: dotnet pack --configuration Release      
+      run: dotnet pack --configuration Release
 
     - name: Publish package
       if: startsWith(github.ref, 'refs/heads/develop') || startsWith(github.ref, 'refs/heads/qa') || startsWith(github.ref, 'refs/heads/staging')|| startsWith(github.ref, 'refs/heads/releases/*')
