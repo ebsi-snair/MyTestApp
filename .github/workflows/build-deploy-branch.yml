@@ -7,8 +7,8 @@ on:
       - qa
       - 'features/[A-Z0-9]+-[0-9]+/*'
       - staging
-      # - main
-      # - 'releases/*'
+      - main
+      - 'releases/*'
 
 jobs:
   build-workflow:
