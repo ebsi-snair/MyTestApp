@@ -5,7 +5,7 @@ on:
     branches:
       - develop
       - qa
-      # - 'features/[A-Z0-9]+-[0-9]+/*'
+      - 'features/[A-Z0-9]+-[0-9]+/*'
       - staging
       - main
       - 'releases/*'
@@ -15,3 +15,6 @@ jobs:
     uses: ./.github/workflows/build-workflow.yml
     with:
       branch: ${{ github.event.ref }}
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
