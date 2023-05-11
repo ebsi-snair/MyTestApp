@@ -11,7 +11,15 @@ on:
       - 'releases/*'
 
 jobs:
+  code-analysis:
+    if: startsWith(github.head_ref, 'features/')
+    uses: ./.github/workflows/code-analysis.yml
+    with:
+      branch: ${{ github.event.ref }}
+
   build-workflow:
+    needs: code-analysis
+    if: ${{ needs.code-analysis.result == 'success' }}
     uses: ./.github/workflows/build-workflow.yml
     with:
       branch: ${{ github.event.ref }}
