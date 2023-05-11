@@ -5,13 +5,20 @@ on:
     branches:
       - develop
       - qa
-      # - 'features/[A-Z0-9]+-[0-9]+/*'
+      - 'features/[A-Z0-9]+-[0-9]+/*'
       - staging
       - main
       - 'releases/*'
 
 jobs:
+  code-analysis:
+    if: startsWith(github.event.ref, 'refs/heads/features/')
+    uses: ./.github/workflows/code-analysis.yml
+
   build-workflow:
+    needs: code-analysis
+    if: ${{ needs.code-analysis.result == 'success' }}
     uses: ./.github/workflows/build-workflow.yml
     with:
       branch: ${{ github.event.ref }}
+
