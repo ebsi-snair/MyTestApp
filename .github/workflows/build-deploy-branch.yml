@@ -14,8 +14,6 @@ jobs:
   code-analysis:
     if: startsWith(github.head_ref, 'features/')
     uses: ./.github/workflows/code-analysis.yml
-    with:
-      branch: ${{ github.event.ref }}
 
   build-workflow:
     needs: code-analysis
