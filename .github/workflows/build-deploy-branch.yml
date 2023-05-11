@@ -9,6 +9,12 @@ on:
       - staging
       - main
       - 'releases/*'
+  pull_request:
+    types: [closed]
+    branches:
+      - develop
+      - qa
+      - staging
 
 jobs:
   code-analysis:
