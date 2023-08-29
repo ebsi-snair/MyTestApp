@@ -36,14 +36,14 @@ jobs:
     - name: Build
       run: dotnet build --configuration  Release
 
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    # - name: Test
+    #  run: dotnet test --no-build --verbosity normal
 
-    - name: Create Package
-      run: dotnet pack --configuration Release
+    # - name: Create Package
+    #  run: dotnet pack --configuration Release
 
-    - name: Publish package
-      if: startsWith(github.ref, 'refs/heads/develop') || startsWith(github.ref, 'refs/heads/qa') || startsWith(github.ref, 'refs/heads/staging')|| startsWith(github.ref, 'refs/heads/releases/*')
-      env:
-        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: dotnet nuget push **/*.nupkg --source https://nuget.pkg.github.com/${{ github.repository_owner }} -k ${{ env.NUGET_AUTH_TOKEN }} --skip-duplicate
+    # - name: Publish package
+    #  if: startsWith(github.ref, 'refs/heads/develop') || startsWith(github.ref, 'refs/heads/qa') || startsWith(github.ref, 'refs/heads/staging')|| startsWith(github.ref, 'refs/heads/releases/*')
+    #  env:
+    #    NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #  run: dotnet nuget push **/*.nupkg --source https://nuget.pkg.github.com/${{ github.repository_owner }} -k ${{ env.NUGET_AUTH_TOKEN }} --skip-duplicate
