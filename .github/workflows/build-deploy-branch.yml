@@ -21,7 +21,7 @@ jobs:
   #  if: startsWith(github.event.ref, 'refs/heads/features/')
   #  uses: ./.github/workflows/code-analysis.yml
 
-  build-workflow:
+  build-and-release:
     # needs: code-analysis
     # if: ${{ needs.code-analysis.result == 'success' }}
     uses: ./.github/workflows/build-workflow.yml
